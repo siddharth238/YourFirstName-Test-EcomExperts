@@ -4,13 +4,13 @@
                       <fieldset class="js product-form__input {% unless forloop.first %}hidden{% endunless %}">
                         <legend class="form__label">{{ option.name }}</legend>
                         {%- for value in option.values -%}
-                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }} "
+                          <input style="background-color: {{product.variants[forloop.index0].metafields.color.values}}" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }} "
                                 name="{{ option.name }}"
                                 value="{{ value | escape }}"
                                 form="{{ product_form_id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
-                          <label style="background-color: {{product.variants[forloop.index0].metafields.color.values}}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                          <label  for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                             {{ value }}
                           </label>
                         {%- endfor -%}
