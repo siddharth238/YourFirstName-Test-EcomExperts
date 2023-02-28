@@ -45,7 +45,7 @@
     endfor
   -%}
 
-  {%- if option.name == 'Color' -%}
+  {%- if option.name != 'Color' -%}
     <option
       value="{{ value | escape }}"
       {% if option.selected_value == value %}
