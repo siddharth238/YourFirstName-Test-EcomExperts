@@ -59,7 +59,7 @@
         class="disabled"
       {% endif %}
     >
-    {% if  option.name == 'Color' %}
+    {% if option.name == 'Color' %}
       <label class="color-swatch"
         for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
         style="background-color: {{product.variants[forloop.index0].metafields.color.values}}"
@@ -70,18 +70,37 @@
         {{ value }}
       </label>
     {% endif %}
-  {%- elsif block.settings.picker_type == 'dropdown' -%}
-    <option
-      value="{{ value | escape }}"
-      {% if option.selected_value == value %}
-        selected="selected"
+  {%- elsif block.settings.picker_type == 'dropdown' and option.name == 'Size' -%}
+    <select
+      name="{{ option.name }}"
+      id="{{ section.id }}-{{ option.position }}"
+      {% if option_disabled %}
+        disabled="disabled"
       {% endif %}
     >
-      {% if option_disabled -%}
-        {{- 'products.product.value_unavailable' | t: option_value: value -}}
-      {%- else -%}
-        {{- value -}}
-      {%- endif %}
-    </option>
+      <option value="">{{ 'products.product.select_option' | t }}</option>
+      {% for value in option.values %}
+        <option
+          value="{{ value | escape }}"
+          {% if option.selected_value == value %}
+            selected="selected"
+          {% endif %}
+          {% if option_disabled and forloop.index == 1 %}
+            disabled="disabled"
+          {% endif %}
+        >
+          {% if option_disabled -%}
+            {{- 'products.product.value_unavailable' | t: option_value: value -}}
+          {%- else -%}
+            {{- value -}}
+          {%- endif %}
+        </option>
+      {% endfor %}
+    </select>
+  {%- elsif block.settings.picker_type == 'dropdown' and option.name == 'Color' -%}
+    {% comment %}
+      Render nothing for Color option when using dropdown picker type
+    {% endcomment %}
   {%- endif -%}
 {%- endfor -%}
+
