@@ -874,25 +874,17 @@ filterMedia() {
   }
 
   updateVariantStatuses() {
-  const selectedOptionOneVariants = this.variantData.filter(variant => this.querySelector(':checked').value === variant.option1);
+  const selectedOptionTwoVariants = this.variantData.filter(variant => this.querySelector('.product-form__input--dropdown select').value === variant.option2);
   const inputWrappers = [...this.querySelectorAll('.product-form__input')];
-  let previousOptionSelected = null; // added to track previously selected option
   inputWrappers.forEach((option, index) => {
-    if (index === 0) {
-      previousOptionSelected = this.querySelector(':checked').value;
-      return;
-    }
+    if (index < 2) return; // skip first two options (color and size)
     const optionInputs = [...option.querySelectorAll('input[type="radio"], option')]
-    const availableOptionInputsValue = selectedOptionOneVariants.filter(variant => {
-      if (previousOptionSelected && variant[`option${ index - 1 }`] !== previousOptionSelected) {
-        return false; // skip variants that don't match the previous option selection
-      }
-      return variant.available && variant[`option${ index }`] === previousOptionSelected;
-    }).map(variantOption => variantOption[`option${ index + 1 }`]);
-    this.setInputAvailability(optionInputs, availableOptionInputsValue);
-    previousOptionSelected = option.querySelector(':checked').value; // update previously selected option
+    const previousOptionSelected = inputWrappers[index - 1].querySelector(':checked').value;
+    const availableOptionInputsValue = selectedOptionTwoVariants.filter(variant => variant.available && variant[`option${ index }`] === previousOptionSelected).map(variantOption => variantOption[`option${ index + 1 }`]);
+    this.setInputAvailability(optionInputs, availableOptionInputsValue)
   });
 }
+
 
 
   setInputAvailability(listOfOptions, listOfAvailableOptions) {
