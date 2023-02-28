@@ -820,12 +820,13 @@ class VariantSelects extends HTMLElement {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
 
-updateMasterId() {
-  this.currentVariant = this.getVariantData().find((variant) => {
-    return variant.available;
-  });
-}
-
+  updateMasterId() {
+    this.currentVariant = this.getVariantData().find((variant) => {
+      return !variant.options.map((option, index) => {
+        return this.options[index] === option;
+      }).includes(false);
+    });
+  }
 filterMedia() {
     
          $('[thumbnail-color]').hide();
@@ -840,18 +841,17 @@ filterMedia() {
 
     } }
   updateMedia() {
-  if (!this.currentVariant) return;
-  if (!this.currentVariant.featured_media) return;
+    if (!this.currentVariant) return;
+    if (!this.currentVariant.featured_media) return;
 
-  const mediaGalleries = document.querySelectorAll(`[id^="MediaGallery-${this.dataset.section}"]`);
-  mediaGalleries.forEach(mediaGallery => mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true));
+    const mediaGalleries = document.querySelectorAll(`[id^="MediaGallery-${this.dataset.section}"]`);
+    mediaGalleries.forEach(mediaGallery => mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true));
 
-  const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
-  if (!modalContent) return;
-  const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
-  modalContent.prepend(newMediaModal);
-}
-
+    const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
+    if (!modalContent) return;
+    const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
+    modalContent.prepend(newMediaModal);
+  }
 
   updateURL() {
     if (!this.currentVariant || this.dataset.updateUrl === 'false') return;
