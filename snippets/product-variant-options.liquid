@@ -65,7 +65,7 @@
 {% assign variant_needed = variant %}
 {% endif %}
 {% endfor %}
-{% if variant_needed.metafields.color.swatch and option.name == "Color" %}
+{% if variant_needed.metafields.color.values and option.name == "Color" %}
 <label class="color-swatch" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" data-option="{{ value }}" style="background-color: {{variant_needed.metafields.color.swatch}}">
 &nbsp
 </label>
