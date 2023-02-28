@@ -2994,24 +2994,29 @@ details-disclosure > details {
   }
 }
 
-.card-wrapper {
-height: auto!important;
+.product-form__input input[type="radio"] + .color-swatch {
+border: 3px solid #f4f5ff; /* Change this hex code to change the color of the non-active/non-selected variant */
+width: 40px;
+height: 40px;
+padding: 0;
+}
+.product-form__input input[type="radio"]:checked + .color-swatch,
+.product-form__input input[type="radio"]:hover + .color-swatch {
+border: 3px solid #ccd1d1; /* Change this hex code to change the color of the active/selected variant */
+}
+.product-form__input input[type="radio"] + .swatch {
+border: 3px solid #f4f5ff; /* Change this hex code to change the color of the non-active/non-selected variant */
+width: 40px;
+height: 40px;
+padding: 0;
+color: #000;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+}
+.product-form__input input[type="radio"]:checked + .swatch,
+.product-form__input input[type="radio"]:hover + .swatch {
+border: 3px solid #ccd1d1; /* Change this hex code to change the color of the active/selected variant */
+background: none;
 }
 
-.variant-drop-down {
-display:block !important;
-}
-
-.variant-button {
-background-color: black;
-color: white;
-padding: 5px;
-border-radius: 5px;
-margin-top: 5px;
-}
-
-.variant-button:hover {
-background-color: white;
-color: black;
-cursor: pointer;
-}
