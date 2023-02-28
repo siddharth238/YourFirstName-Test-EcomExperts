@@ -871,11 +871,11 @@ filterMedia() {
     input.value = this.currentVariant.id;
     input.dispatchEvent(new Event('change', { bubbles: true }));
   });
-  
-  // Get the current URL and replace the variant ID with the updated one
-  const currentUrl = window.location.href;
-  const updatedUrl = currentUrl.replace(/variant=\d+/, `variant=${this.currentVariant.id}`);
-  window.history.replaceState(null, null, updatedUrl);
+
+  // Update the URL without triggering a page reload
+  const url = new URL(window.location.href);
+  url.searchParams.set('variant', this.currentVariant.id);
+  history.replaceState(null, null, url.toString());
 }
 
 
