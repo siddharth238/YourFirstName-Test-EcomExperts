@@ -156,37 +156,7 @@
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
-                <li class="grid__item">
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    show_quick_add: section.settings.enable_quick_add,
-                    section_id: section.id
-                  %}
-
-                  {% if request.page_type == 'collection' %}
-{% if product.variants.size > 1 %}
-<div class="variant-drop-down">
-<form action="/cart/add" method="post" >
-<select name="id">
-{% for variant in product.variants %}
-{% if variant.available %}
-<option value="{{ variant.id }}">{{ variant.title }}</option>
-{% else %}
-<option disabled="disabled">{{ variant.title }} - Sold Out</option>
-{% endif %}
-{% endfor %}
-</select><br>
- 
-</form></div>
-{% endif %}
-{% endif %}
-
-    </li>
+              
               
               {%- endfor -%}
             </ul>
