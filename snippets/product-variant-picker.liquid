@@ -10,7 +10,7 @@
                                 form="{{ product_form_id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
-                          <labe style="background-color: {{product.variants[forloop.index0].metafields.color.values}}"l for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                          <label style="background-color: {{product.variants[forloop.index0].metafields.color.values}}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                             {{ value }}
                           </label>
                         {%- endfor -%}
