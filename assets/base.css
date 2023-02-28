@@ -1013,7 +1013,7 @@ summary::-webkit-details-marker {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content:centre;
+  justify-content:center;
   margin-bottom: 2rem;
   padding: 0;
   list-style: none;
