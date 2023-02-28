@@ -19,10 +19,10 @@
               checked
             {% endif %}
           >
-          {% if product.variants[forloop.index0].metafields.color.values  %}
+          {% if product.variants[forloop.index0].metafields.custom.color  %}
             <label class=color-swatch
               for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-              style="background-color: {{product.variants[forloop.index0].metafields.color.values}}"
+              style="background-color: {{product.variants[forloop.index0].metafields.custom.color}}"
             >
             </label>
           {% else %}
