@@ -59,25 +59,17 @@
         class="disabled"
       {% endif %}
     >
-  {% if option.name == 'Color' %}
-  {% for variant in product.variants %}
-    {% if variant.metafields.color.values %}
-      {% if forloop.index0 == variant.position %}
-        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="background-color: {{ variant.metafields.color.values }}"> 
-        </label>
-      {% endif %}
+    {% if  option.name == 'Color' %}
+      <label
+        for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        style="background-color: {{product.variants[forloop.index0].metafields.color.values}}"
+      >
+      </label>
     {% else %}
       <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
         {{ value }}
       </label>
     {% endif %}
-  {% endfor %}
-{% else %}
-  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-    {{ value }}
-  </label>
-{% endif %}
-
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
