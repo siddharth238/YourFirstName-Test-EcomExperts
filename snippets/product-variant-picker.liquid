@@ -10,7 +10,7 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
-  {%- if block.settings.picker_type == 'button' and option.name == 'Color' -%}
+  {%- if block.settings.picker_type == 'button'  -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
       class="no-js-hidden"
@@ -22,27 +22,12 @@
       {{ block.shopify_attributes }}
     >
       {%- for option in product.options_with_values -%}
-        <fieldset class="js product-form__input">
-          <legend class="form__label">{{ option.name }}</legend>
-          {% render 'product-variant-options', product: product, option: option, block: block %}
-        </fieldset>
-      {%- endfor -%}
-      <script type="application/json">
-        {{ product.variants | json }}
-      </script>
-    </variant-radios>
-    {%- if option.name == 'Size' -%}
-      <variant-selects
-        id="variant-selects-{{ section.id }}"
-        class="no-js-hidden"
-        data-section="{{ section.id }}"
-        data-url="{{ product.url }}"
-        {% if update_url == false %}
-          data-update-url="false"
-        {% endif %}
-        {{ block.shopify_attributes }}
-      >
-        {%- for option in product.options_with_values -%}
+        {% if option.name == 'Color' %}
+          <fieldset class="js product-form__input">
+            <legend class="form__label">{{ option.name }}</legend>
+            {% render 'product-variant-options', product: product, option: option, block: block %}
+          </fieldset>
+        {% else %}
           <div class="product-form__input product-form__input--dropdown">
             <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
               {{ option.name }}
@@ -59,15 +44,55 @@
               {% render 'icon-caret' %}
             </div>
           </div>
-        {%- endfor -%}
-
-        <script type="application/json">
-          {{ product.variants | json }}
-        </script>
-      </variant-selects>
-    {%- endif -%}
+        {% endif %}
+      {%- endfor -%}
+      <script type="application/json">
+        {{ product.variants | json }}
+      </script>
+    </variant-radios>
+  {%- else -%}
+    <variant-selects
+      id="variant-selects-{{ section.id }}"
+      class="no-js-hidden"
+      data-section="{{ section.id }}"
+      data-url="{{ product.url }}"
+      {% if update_url == false %}
+        data-update-url="false"
+      {% endif %}
+      {{ block.shopify_attributes }}
+    >
+      {%- for option in product.options_with_values -%}
+        {% if option.name == 'Color' %}
+          <div class="product-form__input product-form__input--radio">
+            <label class="form__label">{{ option.name }}</label>
+            {% render 'product-variant-options', product: product, option: option, block: block %}
+          </div>
+        {% else %}
+          <div class="product-form__input product-form__input--dropdown">
+            <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+              {{ option.name }}
+            </label>
+            <div class="select">
+              <select
+                id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                class="select__select"
+                name="options[{{ option.name | escape }}]"
+                form="{{ product_form_id }}"
+              >
+                {% render 'product-variant-options', product: product, option: option, block: block %}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+          </div>
+        {% endif %}
+      {%- endfor -%}
+      <script type="application/json">
+        {{ product.variants | json }}
+      </script>
+    </variant-selects>
   {%- endif -%}
 {%- endunless -%}
+
 
 <noscript class="product-form__noscript-wrapper-{{ section.id }}">
   <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
