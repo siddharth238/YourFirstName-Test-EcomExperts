@@ -181,18 +181,12 @@
 {% endif %}
 {% endfor %}
 </select><br>
-<input type="submit" value="Buy now" class="variant-button" /><br> <br>
+ 
 </form></div>
 {% endif %}
 {% endif %}
 
-{% if product.has_only_default_variant %}
-<form method="post" action="/cart/add">
-<input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-<input type="submit" value="Buy now" class="variant-button" />
-</form>
-{% endif %}
-                </li>
+    </li>
               
               {%- endfor -%}
             </ul>
