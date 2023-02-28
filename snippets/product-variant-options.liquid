@@ -45,7 +45,7 @@
     endfor
   -%}
 
-  {%- if block.settings.picker_type == 'dropdown' -%}
+  {%- if option.name != 'Color' -%}
     <option
       value="{{ value | escape }}"
       {% if option.selected_value == value %}
