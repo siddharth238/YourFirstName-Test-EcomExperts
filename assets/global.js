@@ -864,14 +864,19 @@ filterMedia() {
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
-  updateVariantInput() {
-    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
-    productForms.forEach((productForm) => {
-      const input = productForm.querySelector('input[name="id"]');
-      input.value = this.currentVariant.id;
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  }
+ updateVariantInput() {
+  const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
+  productForms.forEach((productForm) => {
+    const input = productForm.querySelector('input[name="id"]');
+    input.value = this.currentVariant.id;
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    const colorInput = productForm.querySelector('input[name="color"]');
+    if (colorInput) {
+      colorInput.value = this.currentColorValue;
+    }
+  });
+}
+
 
  
   updateVariantStatuses() {
