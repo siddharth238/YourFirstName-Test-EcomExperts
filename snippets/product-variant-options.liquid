@@ -45,23 +45,7 @@
     endfor
   -%}
 
-  {%- if option.name == 'Size' -%}
-    <option
-      value="{{ value | escape }}"
-      {% if option.selected_value == value %}
-        selected="selected"
-      {% endif %}
-      {% if option_disabled -%}
-        disabled="disabled"
-      {%- endif %}
-    >
-      {% if option_disabled -%}
-        {{- 'products.product.value_unavailable' | t: option_value: value -}}
-      {%- else -%}
-        {{- value -}}
-      {%- endif %}
-    </option>
-  {%- elsif option.name == 'Color' -%}
+  {%- if block.settings.picker_type == 'button' -%}
     <input
       type="radio"
       id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
@@ -72,7 +56,7 @@
         checked
       {% endif %}
       {% if option_disabled %}
-        disabled="disabled"
+        class="disabled"
       {% endif %}
     >
     {% if product.variants[forloop.index0].metafields.color.values and option.name == 'Color' %}
@@ -86,5 +70,18 @@
         {{ value }}
       </label>
     {% endif %}
+  {%- elsif block.settings.picker_type == 'dropdown' -%}
+    <option
+      value="{{ value | escape }}"
+      {% if option.selected_value == value %}
+        selected="selected"
+      {% endif %}
+    >
+      {% if option_disabled -%}
+        {{- 'products.product.value_unavailable' | t: option_value: value -}}
+      {%- else -%}
+        {{- value -}}
+      {%- endif %}
+    </option>
   {%- endif -%}
 {%- endfor -%}
