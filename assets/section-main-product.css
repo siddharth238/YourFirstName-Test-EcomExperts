@@ -649,6 +649,7 @@ a.product__text {
 
   .product:not(.product--columns) .product__media-list .product__media-item:first-child,
   .product:not(.product--columns) .product__media-list .product__media-item--full {
+    display:flex
     width: 100%;
     max-width: 100%;
   }
