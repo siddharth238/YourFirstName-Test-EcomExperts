@@ -864,18 +864,21 @@ filterMedia() {
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
- updateVariantInput() {
+updateVariantInput() {
   const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
   productForms.forEach((productForm) => {
     const input = productForm.querySelector('input[name="id"]');
+    const radioInputs = productForm.querySelectorAll('input[type="radio"]');
     input.value = this.currentVariant.id;
     input.dispatchEvent(new Event('change', { bubbles: true }));
-    const colorInput = productForm.querySelector('input[name="color"]');
-    if (colorInput) {
-      colorInput.value = this.currentColorValue;
-    }
+    radioInputs.forEach((radioInput) => {
+      if (radioInput.value === this.currentVariant.id.toString()) {
+        radioInput.checked = true;
+      }
+    });
   });
 }
+
 
 
  
