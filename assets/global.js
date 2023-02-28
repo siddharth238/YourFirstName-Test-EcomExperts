@@ -877,7 +877,7 @@ filterMedia() {
   const selectedOptionTwoVariants = this.variantData.filter(variant => this.querySelector('.product-form__input--dropdown select').value === variant.option2);
   const inputWrappers = [...this.querySelectorAll('.product-form__input')];
   inputWrappers.forEach((option, index) => {
-    if (index < 2) return; // skip first two options (color and size)
+    if (index == 0) return; // skip first two options (color and size)
     const optionInputs = [...option.querySelectorAll('input[type="radio"], option')]
     const previousOptionSelected = inputWrappers[index - 1].querySelector(':checked').value;
     const availableOptionInputsValue = selectedOptionTwoVariants.filter(variant => variant.available && variant[`option${ index }`] === previousOptionSelected).map(variantOption => variantOption[`option${ index + 1 }`]);
