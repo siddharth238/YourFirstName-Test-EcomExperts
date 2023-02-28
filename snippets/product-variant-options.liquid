@@ -59,9 +59,30 @@
         class="disabled"
       {% endif %}
     >
-  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-{{ value }}
-</label>
+{% for variant in product.variants %}
+  <div class="variant-option">
+    {% for option in product.options %}
+      {% if option == 'Color' %}
+        {% if variant.metafields.color.values %}
+          {% if forloop.index0 == variant.position %}
+            <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index }}">
+              <div class="color-swatch" style="background-color: {{ variant.metafields.color.values }}"></div>
+            </label>
+          {% endif %}
+        {% else %}
+          <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index }}">
+            {{ variant.options[forloop.index] }}
+          </label>
+        {% endif %}
+      {% else %}
+        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index }}">
+          {{ variant.options[forloop.index] }}
+        </label>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
