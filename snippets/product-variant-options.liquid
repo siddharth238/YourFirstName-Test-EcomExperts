@@ -79,7 +79,7 @@
         </label>
       {% endif %}
     {% endif %}
-  {%- elsif option.name == 'Size' -%}
+  {%- else  -%}
     <option
       value="{{ value | escape }}"
       {% if option.selected_value == value %}
