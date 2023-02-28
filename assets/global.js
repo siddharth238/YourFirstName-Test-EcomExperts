@@ -864,20 +864,16 @@ filterMedia() {
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
- updateVariantInput() {
-  const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
-  productForms.forEach((productForm) => {
-    const input = productForm.querySelector('input[name="id"]');
-    input.value = this.currentVariant.id;
-    input.dispatchEvent(new Event('change', { bubbles: true }));
-  });
+  updateVariantInput() {
+  // Get the current URL and remove any existing variant ID query parameter
+  let url = window.location.href.replace(/[\?&]variant=\d+/, '');
 
-  // Update the URL without triggering a page reload
-  const url = new URL(window.location.href);
-  url.searchParams.set('variant', this.currentVariant.id);
-  history.replaceState(null, null, url.toString());
+  // Add the current variant ID as a query parameter
+  url += (url.indexOf('?') === -1 ? '?' : '&') + `variant=${this.currentVariant.id}`;
+
+  // Update the URL and trigger a page reload
+  window.location.href = url;
 }
-
 
 
  
