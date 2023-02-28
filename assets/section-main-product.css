@@ -491,7 +491,7 @@ a.product__text {
   border-radius: calc(var(--media-radius) - var(--media-border-width));
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 1000px) {
   .product__media-list {
     margin-left: -2.5rem;
     margin-bottom: 3rem;
@@ -525,7 +525,7 @@ a.product__text {
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@media screen and (min-width: 750px)  {
   .product--thumbnail .product__media-list,
   .product--thumbnail_slider .product__media-list {
     padding-bottom: calc(var(--media-shadow-vertical-offset) * var(--media-shadow-visible));
@@ -556,6 +556,7 @@ a.product__text {
 .product__media-item--variant:first-child {
   display: block;
 }
+
  
 
 .product__media-icon .icon {
