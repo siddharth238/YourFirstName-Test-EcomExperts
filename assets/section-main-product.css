@@ -491,7 +491,7 @@ a.product__text {
   border-radius: calc(var(--media-radius) - var(--media-border-width));
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 1500px) {
   .product__media-list {
     margin-left: -2.5rem;
     margin-bottom: 3rem;
@@ -649,10 +649,7 @@ a.product__text {
 
   .product:not(.product--columns) .product__media-list .product__media-item:first-child,
   .product:not(.product--columns) .product__media-list .product__media-item--full {
-    display:flex;
-    flex-direction:column;
-    align-items:centre;
-    justify-content:centre;
+   
     width: 100%;
     max-width: 100%;
   }
