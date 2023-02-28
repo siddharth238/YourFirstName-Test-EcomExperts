@@ -52,10 +52,10 @@
     >
       {%- for option in product.options_with_values -%}
         {%- if option.name == 'Color' -%}
-          <div class="product-form__input product-form__input--radio">
+          <fieldset class="js product-form__input">
             <legend class="form__label">{{ option.name }}</legend>
             {% render 'product-variant-options', product: product, option: option, block: block %}
-          </div>
+          </fieldset>
         {%- else -%}
           <div class="product-form__input product-form__input--dropdown">
             <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -81,6 +81,7 @@
     </variant-selects>
   {%- endif -%}
 {%- endunless -%}
+
 
 
 <noscript class="product-form__noscript-wrapper-{{ section.id }}">
