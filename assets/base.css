@@ -2993,3 +2993,25 @@ details-disclosure > details {
     outline: transparent solid 1px;
   }
 }
+
+.card-wrapper {
+height: auto!important;
+}
+
+.variant-drop-down {
+display:block !important;
+}
+
+.variant-button {
+background-color: black;
+color: white;
+padding: 5px;
+border-radius: 5px;
+margin-top: 5px;
+}
+
+.variant-button:hover {
+background-color: white;
+color: black;
+cursor: pointer;
+}
