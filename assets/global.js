@@ -873,26 +873,18 @@ filterMedia() {
     });
   }
 
+ 
   updateVariantStatuses() {
-  const selectedOptionOneVariants = this.variantData.filter(variant => this.querySelector(':checked').value === variant.option1);
-  const inputWrappers = [...this.querySelectorAll('.product-form__input')];
-  let previousOptionSelected = null; // added to track previously selected option
-  inputWrappers.forEach((option, index) => {
-    if (index === 0) {
-      previousOptionSelected = this.querySelector(':checked').value;
-      return;
-    }
-    const optionInputs = [...option.querySelectorAll('input[type="radio"], option')]
-    const availableOptionInputsValue = selectedOptionOneVariants.filter(variant => {
-      if (previousOptionSelected && variant[`option${ index - 1 }`] !== previousOptionSelected) {
-        return false; // skip variants that don't match the previous option selection
-      }
-      return variant.available && variant[`option${ index }`] === previousOptionSelected;
-    }).map(variantOption => variantOption[`option${ index + 1 }`]);
-    this.setInputAvailability(optionInputs, availableOptionInputsValue);
-    previousOptionSelected = option.querySelector(':checked').value; // update previously selected option
-  });
-}
+    const selectedOptionOneVariants = this.variantData.filter(variant => this.querySelector(':checked').value === variant.option1);
+    const inputWrappers = [...this.querySelectorAll('.product-form__input')];
+    inputWrappers.forEach((option, index) => {
+      if (index === 0) return;
+      const optionInputs = [...option.querySelectorAll('input[type="radio"], option')]
+      const previousOptionSelected = inputWrappers[index - 1].querySelector(':checked').value;
+      const availableOptionInputsValue = selectedOptionOneVariants.filter(variant => variant.available && variant[`option${ index }`] === previousOptionSelected).map(variantOption => variantOption[`option${ index + 1 }`]);
+      this.setInputAvailability(optionInputs, availableOptionInputsValue)
+    });
+  }
 
 
   setInputAvailability(listOfOptions, listOfAvailableOptions) {
