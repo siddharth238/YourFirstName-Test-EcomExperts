@@ -1,4 +1,4 @@
-  {% comment %}
+{% comment %}
   Renders product variant options
 
   Accepts:
@@ -45,7 +45,7 @@
     endfor
   -%}
 
-{%- if block.settings.picker_type == 'button' -%}
+  {%- if block.settings.picker_type == 'button' -%}
     <input
       type="radio"
       id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
@@ -78,4 +78,3 @@
     </option>
   {%- endif -%}
 {%- endfor -%}
-
