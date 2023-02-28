@@ -14,6 +14,8 @@
             id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
             name="{{ option.name }}"
             value="{{ value | escape }}"
+            onchange="updateVariantInput()"
+
             form="{{ product_form_id }}"
             {% if option.selected_value == value %}
               checked
