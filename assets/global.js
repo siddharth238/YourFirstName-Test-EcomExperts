@@ -864,15 +864,17 @@ filterMedia() {
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
-  updateVariantInput() {
+  updateVariantInput(event) {
   // Get the current URL and remove any existing variant ID query parameter
   let url = window.location.href.replace(/[\?&]variant=\d+/, '');
+  
 
   // Add the current variant ID as a query parameter
   url += (url.indexOf('?') === -1 ? '?' : '&') + `variant=${this.currentVariant.id}`;
 
   // Update the URL and trigger a page reload
   window.location.href = url;
+    event.preventDefault();
 }
 
 
